@@ -19,7 +19,11 @@ function init(startingBalance, typeOperation) {
         return init(queries("Enter starting balance", 1), typeOperation)
     }
     if (!typeOperation) {
-        typeOperation = queries("Enter another operation: start deposit(start), deposit, withdraw, or stop")
+        if(saldo) {
+            typeOperation = queries("Enter another operation: deposit, withdraw, or stop")
+        } else {
+            typeOperation = queries("Enter another operation: start deposit(start), deposit, withdraw, or stop")
+        }
         if (typeOperation === "start") {
             return init(queries("Enter starting balance", 1), "")
         }
@@ -52,7 +56,7 @@ function init(startingBalance, typeOperation) {
     return init(saldo, typeOperation)
 }
 
-init(queries("Enter starting balance"), "")
+init(queries("Enter starting balance", 1), "")
 
 function tambahSaldo(balance, deposit) {
     return balance + deposit;
